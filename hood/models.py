@@ -1,6 +1,47 @@
 from django.db import models
 
 # Create your models here.
+class NeighborHood(models.Model):
+
+    neighborhood_image=models.ImageField(upload_to='neighborhoods',null=True)
+    name=models.CharField(max_length =40)
+    location=models.CharField(max_length=40)
+    occupants_count=models.PositiveIntegerField(blank=True,null=True)
+
+    def __str__(self):
+        return self.name
+
+    def save_neighborhood(self):
+        self.save()
+    def delete_neighborhood(self):
+        self.delete()
+
+    def update_neighborhood(self):
+        self.neighborhood_image=neighborhood_image
+        self.name=name
+        self.location=location
+        self.occupants_count=occupants_count
+        self.save()
+
+
+    def update_occupants(self,occupants_count):
+        self.occupants_count=occupants_count
+        self.save()
+
+
+    @classmethod
+    def find_neighborhood_by_id(cls,neighborhood_id):
+        neighborhood=cls.objects.get(id=neighborhood_id)
+        return neighborhood
+
+    @classmethod
+    def get_all_neighborhoods(cls):
+        neighborhoods=cls.objects.all()
+        return neighborhoods
+
+
+
+
 class Userprofile(models.Model):
 
     profile_image=models.ImageField(upload_to='userprofiles',null=True)
