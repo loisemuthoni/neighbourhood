@@ -61,7 +61,7 @@ def contacts(request):
 def neighbourhood(request,neighborhood_id):
     businesses=Business.objects.filter(neighborhood_id=neighborhood_id)
 
-
+    return render(request,'business.html',{"business":business})
 
 def neighborhood(request,neighborhood_id):
     neighborhood=NeighborHood.objects.get(id=neighborhood_id)
