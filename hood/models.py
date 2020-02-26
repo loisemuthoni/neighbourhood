@@ -1,6 +1,27 @@
 from django.db import models
 
 # Create your models here.
+class Userprofile(models.Model):
+
+    profile_image=models.ImageField(upload_to='userprofiles',null=True)
+    user_name=models.OneToOneField(User,null = True,on_delete=models.CASCADE,related_name = "user")
+    neighborhood=models.ForeignKey(NeighborHood,on_delete=models.CASCADE,blank=True,null=True)
+    email=models.EmailField(blank=True,null=True)
+
+
+
+    def save_userprofile(self):
+        self.save()
+    def delete_userprofile(self):
+        self.delete()
+
+    def update_neighborhood(self,neighborhood):
+        self.neighborhood=neighborhood
+        self.save()
+        # NeighborHood.objects.filter(id=userprofile_id).update(neighborhood="neighborhood_id")
+
+
+
 
 class Business(models.Model):
     business_image=models.ImageField(upload_to='businesses',null=True)
