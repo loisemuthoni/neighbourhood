@@ -41,7 +41,45 @@ class NeighborHood(models.Model):
         return neighborhoods
 
 
+class Post(models.Model):
+    post_image=models.ImageField(upload_to='posts',null=True)
+    owner=models.ForeignKey(User,on_delete=models.CASCADE,null=True)
+    title=models.CharField(max_length =30)
+    neighborhood=models.ForeignKey(NeighborHood,on_delete=models.CASCADE,blank=True,null=True)
+    post=models.TextField()
 
+    def __str__(self):
+        return self.title
+
+    @classmethod
+    def get_all_posts(cls):
+        posts=cls.objects.all()
+        return posts
+    def save_post(self):
+        self.save()
+    def delete_post(self):
+        self.delete()
+
+class HealthCenter(models.Model):
+    name = models.CharField(max_length = 50)
+    location=models.CharField(max_length =50)
+    contact=models.CharField(max_length=40)
+
+    @classmethod
+    def get_all_health(cls):
+        health=cls.objects.all()
+        return health
+
+
+class PoliceCenters(models.Model):
+    name = models.CharField(max_length = 50)
+    location=models.CharField(max_length =50)
+    contact=models.CharField(max_length=40)
+
+    @classmethod
+    def get_all_police(cls):
+        police=cls.objects.all()
+        return police
 
 class Userprofile(models.Model):
 
