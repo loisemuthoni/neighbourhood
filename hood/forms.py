@@ -16,3 +16,18 @@ class UpdateForm(forms.ModelForm):
     class Meta:
         model=Userprofile
         exclude=["profile_image","user_name","email"]
+
+class NewNeighborhoodForm(forms.ModelForm):
+    class Meta:
+        model=NeighborHood
+        fields=['neighborhood_image','name','location','occupants_count']
+
+class NewPostForm(forms.ModelForm):
+    class Meta:
+        model=Post
+        exclude=['owner']
+
+class NewCommentForm(forms.ModelForm):
+    class Meta:
+        model=Comment
+        exclude=['commenter']
