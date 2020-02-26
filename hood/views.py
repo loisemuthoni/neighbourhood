@@ -30,3 +30,23 @@ def homepage(request):
 
     return render(request,'homepage.html',{"businesses":businesses,"neighborhoods":neighborhoods,"posts":posts,"form":form})
 
+def comments(request):
+
+    comments=Comment.get_comments()
+
+    return render(request,'comments.html',{"comments":comments})
+
+def new_comment(request):
+    current_user=request.user
+    if request.method == 'POST':
+        form =NewCommentForm(request.POST,request.FILES)
+        if form.is_valid():
+            comment=form.save(commit=False)
+
+            comment.commenter = current_user
+
+            comment.save()
+        return redirect('homepage')
+    else:
+        form=NewCommentForm()
+    return render(request,'comment.html',{"form":form})
