@@ -171,3 +171,31 @@ class Comment(models.Model):
     def get_comments_by_post_id(cls,post_id):
         comments=cls.objects.filter(id=post_id)
         return comments
+
+class Category(models.Model):
+    name=models.CharField(max_length=30)
+
+    def __str__(self):
+        return self.name
+    class Meta:
+        verbose_name_plural = "Categories"
+
+
+    def save_category(self):
+        self.save()
+
+    def delete_category(self):
+        self.delete()
+
+class Location(models.Model):
+    name=models.CharField(max_length=30)
+
+
+    def __str__(self):
+        return self.name
+
+    def save_location(self):
+        self.save()
+
+    def delete_location(self):
+        self.delete()
