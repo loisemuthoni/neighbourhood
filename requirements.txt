@@ -1,4 +1,8 @@
-Django==1.11.17
+asgiref==3.2.3
+confusable-homoglyphs==3.2.0
+Django==1.11.28
 django-bootstrap3==12.0.3
+django-registration==2.4.1
 pkg-resources==0.0.0
 pytz==2019.3
+sqlparse==0.3.0
