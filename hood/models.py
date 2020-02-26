@@ -1,7 +1,9 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+
 # Create your models here.
+
 class NeighborHood(models.Model):
 
     neighborhood_image=models.ImageField(upload_to='neighborhoods',null=True)
@@ -41,45 +43,6 @@ class NeighborHood(models.Model):
         return neighborhoods
 
 
-class Post(models.Model):
-    post_image=models.ImageField(upload_to='posts',null=True)
-    owner=models.ForeignKey(User,on_delete=models.CASCADE,null=True)
-    title=models.CharField(max_length =30)
-    neighborhood=models.ForeignKey(NeighborHood,on_delete=models.CASCADE,blank=True,null=True)
-    post=models.TextField()
-
-    def __str__(self):
-        return self.title
-
-    @classmethod
-    def get_all_posts(cls):
-        posts=cls.objects.all()
-        return posts
-    def save_post(self):
-        self.save()
-    def delete_post(self):
-        self.delete()
-
-class HealthCenter(models.Model):
-    name = models.CharField(max_length = 50)
-    location=models.CharField(max_length =50)
-    contact=models.CharField(max_length=40)
-
-    @classmethod
-    def get_all_health(cls):
-        health=cls.objects.all()
-        return health
-
-
-class PoliceCenters(models.Model):
-    name = models.CharField(max_length = 50)
-    location=models.CharField(max_length =50)
-    contact=models.CharField(max_length=40)
-
-    @classmethod
-    def get_all_police(cls):
-        police=cls.objects.all()
-        return police
 
 class Userprofile(models.Model):
 
@@ -99,9 +62,6 @@ class Userprofile(models.Model):
         self.neighborhood=neighborhood
         self.save()
         # NeighborHood.objects.filter(id=userprofile_id).update(neighborhood="neighborhood_id")
-
-
-
 
 class Business(models.Model):
     business_image=models.ImageField(upload_to='businesses',null=True)
@@ -149,6 +109,47 @@ class Business(models.Model):
 
 
 
+class Post(models.Model):
+    post_image=models.ImageField(upload_to='posts',null=True)
+    owner=models.ForeignKey(User,on_delete=models.CASCADE,null=True)
+    title=models.CharField(max_length =30)
+    neighborhood=models.ForeignKey(NeighborHood,on_delete=models.CASCADE,blank=True,null=True)
+    post=models.TextField()
+
+    def __str__(self):
+        return self.title
+
+    @classmethod
+    def get_all_posts(cls):
+        posts=cls.objects.all()
+        return posts
+    def save_post(self):
+        self.save()
+    def delete_post(self):
+        self.delete()
+
+class HealthCenter(models.Model):
+    name = models.CharField(max_length = 50)
+    location=models.CharField(max_length =50)
+    contact=models.CharField(max_length=40)
+
+    @classmethod
+    def get_all_health(cls):
+        health=cls.objects.all()
+        return health
+
+class PoliceCenters(models.Model):
+    name = models.CharField(max_length = 50)
+    location=models.CharField(max_length =50)
+    contact=models.CharField(max_length=40)
+
+    @classmethod
+    def get_all_police(cls):
+        police=cls.objects.all()
+        return police
+
+
+
 class Comment(models.Model):
     post = models.ForeignKey(Post,blank=True, on_delete=models.CASCADE,null=True,related_name='comment')
     commenter=models.ForeignKey(User,on_delete=models.CASCADE,null=True)
@@ -171,6 +172,7 @@ class Comment(models.Model):
     def get_comments_by_post_id(cls,post_id):
         comments=cls.objects.filter(id=post_id)
         return comments
+
 
 class Category(models.Model):
     name=models.CharField(max_length=30)
