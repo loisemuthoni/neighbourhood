@@ -3,9 +3,7 @@
   
 # Description  
 This project allows users to post their hood, posts, police stations and businesses around their neighbourhood
-##  Live Link  
- Click [View Site](.....)  to visit the site
-  
+
 ## User Story  
   
 * A user can view different neighbourhoods  
